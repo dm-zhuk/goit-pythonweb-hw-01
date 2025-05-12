@@ -1,9 +1,7 @@
 from abc import ABC, abstractmethod
-import logging
+from logger import apply_logging
 
-logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+logger = apply_logging("Library")
 
 
 # SOLID Single responsibility (SRP)
@@ -46,11 +44,11 @@ class Library(LibraryInterface):
                 self.books.remove(book)
                 break
         else:
-            logging.warning(f"Book with title '{title}' not found.")
+            logger.warning(f"Book with title '{title}' not found.")
 
     def show_books(self) -> None:
         for book in self.books:
-            logging.info(book)
+            logger.info(book)
 
 
 # SOLID Dependency Inversion (DIP) - LibraryManager depends on the LibraryInterface
@@ -90,7 +88,7 @@ def main():
             case "exit":
                 break
             case _:
-                logging.warning("Invalid command. Please try again.")
+                logger.warning("Invalid command. Please try again.")
 
 
 if __name__ == "__main__":

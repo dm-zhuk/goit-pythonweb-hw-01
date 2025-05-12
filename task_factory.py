@@ -1,12 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import logging
 from abc import ABC, abstractmethod
+from logger import apply_logging
 
-logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+logger = apply_logging("Factory")
 
 
 class Vehicle(ABC):
@@ -32,7 +30,7 @@ class Car(Vehicle):
         if self.spec:
             log_message += f" ({self.spec})"
         log_message += ": Двигун запущено"
-        logging.info(log_message)
+        logger.info(log_message)
 
 
 class Motorcycle(Vehicle):
@@ -45,7 +43,7 @@ class Motorcycle(Vehicle):
         if self.spec:
             log_message += f" ({self.spec})"
         log_message += ": Мотор заведено"
-        logging.info(log_message)
+        logger.info(log_message)
 
 
 class VehicleFactory(ABC):
